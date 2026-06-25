@@ -14,20 +14,24 @@ namespace TripMate.DAL.Interfaces
         Task<T> GetByIdAsync(object id);
 
         // Read Lists
-        IEnumerable<T> GetAll();           // Returns Active Only
-        Task<IEnumerable<T>> GetAllAsync(); // Returns Active Only
+        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAllAsync(); 
 
-        // Admin / Special
-        Task<IEnumerable<T>> GetAllIgnoreFiltersAsync(); // Returns ALL
-
-        IEnumerable<T> GetAllIgnoreFilters();
 
         // Writes
         void Add(T entity);
         Task AddAsync(T entity);
+        Task AddRangeAsync(IEnumerable<T> entities);
+
         void Update(T entity);
         Task UpdateAsync(T entity);
         Task UpdateRangeAsync(IEnumerable<T> entities);
+
+        void IsTracking(T entity);
+        Task IsTrackingAsync(T entity);
+
+        void SetTracking(T entity);
+        Task SetTrackingAsync(T entity);
 
         // Hard Delete
         void Delete(object id);
@@ -37,7 +41,6 @@ namespace TripMate.DAL.Interfaces
         Task<IEnumerable<T>> GetListAsync(Expression<Func<T, bool>> filter);
         Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter, string includeProperties = "");
 
-        Task AddRangeAsync(IEnumerable<T> entities);
         Task SaveChangesAsync();
     }
 }
